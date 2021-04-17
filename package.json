@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@11ty/eleventy-cache-assets": "^2.1.0"
+  }
+}
