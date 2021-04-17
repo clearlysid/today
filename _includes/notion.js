@@ -135,25 +135,22 @@ const renderAsset = (blockValue) => {
 		case "video":
 			// console.log(blockValue.properties);
 			const url = blockValue.properties.source[0][0];
-			const hackUrl = mapImageUrl(url, blockValue);
-
 			return `<figcaption>sorry, a notion update broke access to this video file</figcaption>`;
-			return `<video width="640" height="480" controls><source src="${hackUrl}" type="video/mp4"></video>`;
 		default:
 			return ``;
 	}
 };
 
 const renderCodeBlock = (content, language) => {
-	const Prism = require("prismjs");
+	// const Prism = require("prismjs");
 
 	// TODO: add support for other languages
-	const highlightedCode = Prism.highlight(
-		content,
-		Prism.languages.javascript,
-		"javascript"
-	);
-	return `<pre><code class="${language}-code">${highlightedCode}</code></pre>`;
+	// const highlightedCode = Prism.highlight(
+	// 	content,
+	// 	Prism.languages.javascript,
+	// 	"javascript"
+	// );
+	return `<pre><code class="${language}-code">${content}</code></pre>`;
 };
 
 // TODO: Refactor classnames to be "notion" + "block-type"
@@ -167,18 +164,32 @@ function Block(level, blockMap, block, children) {
 
 	switch (blockValue.type) {
 		case "page":
-			// console.dir(blockValue.format);
-			const {
-				page_icon,
-				page_cover,
-				page_full_width,
-				page_small_text,
-				page_cover_position,
-			} = blockValue.format || {};
+			console.dir(blockValue.properties.title);
+			const { page_icon, page_cover, page_full_width } =
+				blockValue.format || {};
+
+			let pageTitle = "";
+			if (blockValue.properties.title) {
+				pageTitle = `<h1 class="notion notion-page-title">${blockValue.properties.title[0][0]}</h1>`;
+			}
+
+			let pageImage = "";
+
+			if (page_icon) {
+				pageIconUrl = mapImageUrl(page_icon, blockValue);
+				pageImage = cloudinaryRenderer(pageIconUrl, "Siddharth Jha");
+			}
+
+			// console.dir(mapImageUrl(page_icon, blockValue));
 
 			// now we can add support for icon, cover-image and position, width, text size
 			// TODO: render a self-contained page section
-			return `${children}`;
+			// return `${children}`;
+			return `
+				${pageTitle}
+				${pageImage}
+				${children}
+			`;
 		case "header":
 			return `<h1 class="notion>${children}</h1>`;
 		case "sub_header":
