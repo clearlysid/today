@@ -22,6 +22,15 @@ p {
 	color: #343434;
 }
 
+ol {
+	color: #343434;
+	list-style-position: outside;
+	padding-left: 1.4em;
+	margin: 0;
+	margin-bottom: 0.6em;
+	line-height: 1.6em;
+}
+
 p:first-of-type {
 	margin-top: 0;
 	margin-bottom: 2rem;
@@ -120,7 +129,8 @@ h2,
 h3,
 h4 {
 	margin-top: 2em;
-	margin-bottom: 0.6em;
+	margin-bottom: 0.8em;
+	font-weight: 500;
 }
 
 .notion-header + p > a {
@@ -135,6 +145,31 @@ h4 {
 
 .notion-header + p > a:hover {
 	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .4s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%23ec1943' stroke-width='1' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
+	background-position: 0 100%;
+	background-size: auto 4px;
+	background-repeat: repeat-x;
+	text-decoration: none;
+}
+
+hr {
+	border-width: 1px;
+	opacity: 0.2;
+	border-color: black;
+	margin: 3rem auto 3rem;
+}
+
+a {
+	background: linear-gradient(to bottom, #de369d 0%, #de369d 100%);
+	background-position: 0 100%;
+	background-repeat: repeat-x;
+	background-size: 3px 1.5px;
+	color: #de369d;
+	text-decoration: none;
+	padding-bottom: 0.1em;
+}
+
+a:hover {
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .4s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%23DE369D' stroke-width='1' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
 	background-position: 0 100%;
 	background-size: auto 4px;
 	background-repeat: repeat-x;
