@@ -2,7 +2,7 @@ module.exports = function CloudinaryRenderer(url, alt) {
 	const formats = ["webp", "png"];
 	const widths = [500, 1000];
 	const caption = alt
-		? `<figcaption class="image-caption">${alt}<figcaption>`
+		? `<figcaption class="image-caption">${alt}</figcaption>`
 		: "";
 
 	const getCloudinaryLink = (format, width, source) => {

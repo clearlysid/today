@@ -65,6 +65,11 @@ const renderText = (title) => {
 				if (!dec[0]) return "";
 				switch (dec[0]) {
 					case "h":
+						if (dec[1].includes("pink")) {
+							return `<span class="notion-redacted">${"█".repeat(
+								Math.min(el.length, 10)
+							)}</span>`;
+						}
 						return `<span class="notion-${dec[1]}">${el}</span>`;
 					case "c":
 						return `<code class="notion">${el}</code>`;
@@ -122,16 +127,6 @@ const renderAsset = (blockValue) => {
 			}
 
 			return cloudinaryRenderer(sourceUrl, caption);
-		case "figma":
-			return `<iframe class="notion" src="${
-				blockValue.properties.source[0][0]
-			}" style="height:500px;"></iframe>
-						${
-							blockValue.properties.caption &&
-							`<figcaption class="notion-image-caption">${renderText(
-								blockValue.properties.caption
-							)}</figcaption>`
-						}`;
 		case "video":
 			// console.log(blockValue.properties);
 			const url = blockValue.properties.source[0][0];
@@ -142,14 +137,6 @@ const renderAsset = (blockValue) => {
 };
 
 const renderCodeBlock = (content, language) => {
-	// const Prism = require("prismjs");
-
-	// TODO: add support for other languages
-	// const highlightedCode = Prism.highlight(
-	// 	content,
-	// 	Prism.languages.javascript,
-	// 	"javascript"
-	// );
 	return `<pre><code class="${language}-code">${content}</code></pre>`;
 };
 
@@ -164,7 +151,6 @@ function Block(level, blockMap, block, children) {
 
 	switch (blockValue.type) {
 		case "page":
-			console.dir(blockValue.properties.title);
 			const { page_icon, page_cover, page_full_width } =
 				blockValue.format || {};
 
@@ -174,22 +160,12 @@ function Block(level, blockMap, block, children) {
 			}
 
 			let pageImage = "";
-
 			if (page_icon) {
 				pageIconUrl = mapImageUrl(page_icon, blockValue);
 				pageImage = cloudinaryRenderer(pageIconUrl, "Siddharth Jha");
 			}
 
-			// console.dir(mapImageUrl(page_icon, blockValue));
-
-			// now we can add support for icon, cover-image and position, width, text size
-			// TODO: render a self-contained page section
-			// return `${children}`;
-			return `
-				${pageTitle}
-				${pageImage}
-				${children}
-			`;
+			return `<header class="notion notion-header">${pageTitle}${pageImage}</header>${children}`;
 		case "header":
 			return `<h1 class="notion>${children}</h1>`;
 		case "sub_header":
@@ -219,6 +195,7 @@ function Block(level, blockMap, block, children) {
 			const isTopLevel =
 				block.value.type !== blockMap[block.value.parent_id].value.type;
 			const start = getListNumber(blockValue.id, blockMap);
+
 			return isTopLevel ? wrapList(output, start) : output;
 		case "column_list":
 			return `<div class="notion notion-row">${children}</div>`;
@@ -234,36 +211,6 @@ function Block(level, blockMap, block, children) {
 			return `<blockquote class="notion">${text}</blockquote>`;
 		case "callout":
 			return `<div class="notion notion-callout">${text}</div>`;
-		case "bookmark":
-			const link = blockValue.properties.link;
-			const description = blockValue.properties.description;
-			const icon = blockValue.format.bookmark_icon || "";
-			const cover = blockValue.format.bookmark_cover || "";
-
-			return `
-				<div class="notion notion-row">
-					<a target="_blank" class="notion-bookmark" href="${link[0][0]}">
-						<div>
-							<div class="notion-bookmark-title">${text}</div>
-							${
-								description &&
-								`<div class="notion-bookmark-description">${renderText(
-									description
-								)}</div>`
-							}
-							<div class="notion-bookmark-link">
-								${icon && `<img src="${icon}" alt="" />`}
-								<div>${renderText(link)}</div>
-							</div>
-						</div>
-						${
-							cover &&
-							`<div class="notion-bookmark-image">
-								<img src="${cover}" alt="" />
-							</div>`
-						}
-					</a>
-				</div>`;
 		case "toggle":
 			return `
 				<details class="notion notion-toggle">
@@ -277,9 +224,7 @@ function Block(level, blockMap, block, children) {
 					? " checked"
 					: ""
 			}">${text}</div>`;
-		case "codepen":
 		case "embed":
-		case "figma":
 		case "video":
 		case "image":
 			return `<figure class="notion notion-${
