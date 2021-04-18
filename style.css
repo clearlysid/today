@@ -1,6 +1,6 @@
 html {
 	height: 100%;
-	font-size: 18px;
+	font-size: min(18px, max(2.5vw, 14px));
 }
 
 body {
@@ -120,7 +120,7 @@ ul > li::before {
 	z-index: 1;
 	position: absolute;
 	top: 0.3em;
-	left: -1em;
+	left: -1.4em;
 	transform-origin: top;
 	opacity: 0.4;
 }
