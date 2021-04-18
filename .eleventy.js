@@ -3,6 +3,7 @@ const CloudinaryRenderer = require("./_includes/cloudinary");
 
 module.exports = function (eleventyConfig) {
 	eleventyConfig.addPassthroughCopy("style.css");
+	eleventyConfig.addPassthroughCopy("favicons/");
 
 	// cloudinary image shortcode
 	eleventyConfig.addShortcode("cloudimage", (url, alt) =>
