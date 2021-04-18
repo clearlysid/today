@@ -5,25 +5,31 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="style.css">
-	<title>{%- if title -%} {{- title -}} {%- else -%} {{- seo.title -}} {%- endif -%}</title>
-	<link rel="canonical" href="https://www.sidds.me{{- page.url -}}" />
-	<meta name="description" content="{%- if description -%} {{- description -}} {%- else -%} {{- seo.description -}} {%- endif -%}"/>
-	<meta property="og:title" content="{%- if title -%} {{- title -}} {%- else -%} {{- seo.title -}} {%- endif -%}"/>
-	<meta property="og:description" content="{%- if description -%} {{- description -}} {%- else -%} {{- seo.description -}} {%- endif -%}"/>
-	<meta property="og:type" content="{%- if type -%} {{- type -}} {%- else -%} {{- seo.type -}} {%- endif -%}"/>
-	<meta property="og:image" content="{%- if image -%} {{- image -}} {%- else -%} {{- seo.image -}} {%- endif -%}"/>
+	<title>{{- seo.title -}}</title>
+	<meta name="description" content="{{- seo.description -}}"/>
+	<meta property="og:title" content="{{- seo.title -}}}"/>
+	<meta property="og:description" content="{{- seo.description -}}"/>
+	<meta property="og:type" content="{{- seo.type -}}"/>
+	<meta property="og:image" content="{{- seo.image -}}"/>
 	<meta property="og:url" content="{{- page.url -}}" />
-	<meta property="og:site_name" content="{%- if author -%} {{- author -}} {%- else -%} {{- seo.author -}} {%- endif -%}"/>
+	<meta property="og:site_name" content="{{- seo.author -}}"/>
 	<meta name="twitter:card" value="summary" />
-	<meta name="twitter:site" content="{%- if username -%} {{- username -}} {%- else -%} {{- seo.username -}} {%- endif -%}"/>
-	<meta name="twitter:title" content="{%- if title -%} {{- title -}} {%- else -%} {{- seo.title -}} {%- endif -%}"/>
-	<meta name="twitter:description" content="{%- if description -%} {{- description -}} {%- else -%} {{- seo.description -}} {%- endif -%}"/>
-	<meta name="twitter:creator" content="{%- if username -%} {{- username -}} {%- else -%} {{- seo.username -}} {%- endif -%}"/>
-	<meta name="twitter:image" content="{%- if image -%} {{- image -}} {%- else -%} {{- seo.image -}} {%- endif -%}"/>
+	<meta name="twitter:site" content="{{- seo.username -}}"/>
+	<meta name="twitter:title" content="{{- seo.title -}}"/>
+	<meta name="twitter:description" content="{{- seo.description -}}"/>
+	<meta name="twitter:creator" content="{{- seo.username -}}"/>
+	<meta name="twitter:image" content="{{- seo.image -}}"/>
+	<!-- <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script> -->
 </head>
 <body>
 	<div class="w">
 		{% notion now %}
 	</div>
+
+	<!-- <script>
+		document.addEventListener('DOMContentLoaded', () => {
+            twemoji.parse(document.body);
+        });
+	</script> -->
 </body>
 </html>
