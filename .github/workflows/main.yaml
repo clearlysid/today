@@ -1,0 +1,11 @@
+name: Daily Netlify Rebuild
+on:
+    schedule:
+        - cron: "0 0 * * *"
+jobs:
+    build:
+        name: Trigger Webhook
+        runs-on: ubuntu-latest
+        steps:
+            - name: Curl request
+              run: curl -X POST -d {} https://api.netlify.com/build_hooks/607bf4b9815f4ce2e56c6406
