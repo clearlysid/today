@@ -186,3 +186,8 @@ img.emoji {
 	vertical-align: -0.1em;
 	filter: brightness(0.95);
 }
+
+b,
+strong {
+	font-weight: 500;
+}
